@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyTrucksure - Insurance SaaS Solution</title>
+<meta name="description" content="MyTrucksure is a purpose built SaaS app for the trucking insurance market. Technology platform for insurance Carriers, MGA's, Brokers and InsureTech's.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ CSS VARIABLES ═══════════════ */
+:root {
+  --navy-900: #0a1628;
+  --navy-800: #0f2140;
+  --navy-700: #152d54;
+  --navy-600: #1a3a6a;
+  --blue-500: #2563eb;
+  --blue-400: #3b82f6;
+  --blue-300: #60a5fa;
+  --blue-200: #93c5fd;
+  --blue-100: #dbeafe;
+  --blue-50: #eff6ff;
+  --electric: #4f8fff;
+  --cyan: #22d3ee;
+  --slate-900: #0f172a;
+  --slate-700: #334155;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50: #f8fafc;
+  --white: #ffffff;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --shadow-sm: 0 1px 3px rgba(10,22,40,0.06);
+  --shadow-md: 0 4px 20px rgba(10,22,40,0.08);
+  --shadow-lg: 0 8px 40px rgba(10,22,40,0.12);
+  --shadow-xl: 0 20px 60px rgba(10,22,40,0.16);
+  --shadow-glow: 0 0 40px rgba(37,99,235,0.15);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+}
+
+/* ═══════════════ RESET & BASE ═══════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--slate-700);
+  background: var(--white);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); line-height: 1.2; }
+
+/* ═══════════════ UTILITY ═══════════════ */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section-pad { padding: 100px 0; }
+.sr-only { position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0); }
+
+/* ═══════════════ ANIMATIONS ═══════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(37,99,235,0.2); }
+  50% { box-shadow: 0 0 40px rgba(37,99,235,0.4); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0,0); }
+  10% { transform: translate(-5%,-10%); }
+  30% { transform: translate(3%,-15%); }
+  50% { transform: translate(12%,9%); }
+  70% { transform: translate(9%,4%); }
+  90% { transform: translate(-1%,7%); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════ NAVBAR ═══════════════ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.navbar.scrolled {
+  background: rgba(10,22,40,0.95);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 1.25rem; color: var(--white);
+  letter-spacing: -0.02em;
+}
+.nav-logo img { height: 36px; width: 36px; border-radius: 8px; }
+.nav-logo span { background: linear-gradient(135deg, var(--blue-300), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link {
+  color: var(--slate-300); font-size: 0.9rem; font-weight: 500;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  transition: color 0.2s, background 0.2s;
+  cursor: pointer; position: relative;
+  font-family: var(--font-display);
+}
+.nav-link:hover, .nav-link.active { color: var(--white); background: rgba(255,255,255,0.08); }
+/* Dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown .nav-link::after {
+  content: ''; display: inline-block; width: 0; height: 0;
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 4px solid currentColor; margin-left: 6px; vertical-align: middle;
+  transition: transform 0.2s;
+}
+.nav-dropdown:hover .nav-link::after { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 8px); left: 0;
+  background: var(--navy-800); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md); padding: 8px;
+  min-width: 220px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+}
+.nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-item {
+  display: block; padding: 10px 14px; border-radius: var(--radius-sm);
+  color: var(--slate-300); font-size: 0.88rem; font-weight: 500;
+  transition: all 0.15s; font-family: var(--font-display);
+}
+.dropdown-item:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-400));
+  color: var(--white) !important; padding: 10px 22px !important;
+  border-radius: 100px !important; font-weight: 600 !important;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.3);
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(37,99,235,0.4); background: linear-gradient(135deg, var(--blue-500), var(--blue-400)) !important; }
+
+/* Mobile hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+/* ═══════════════ PAGE SECTIONS ═══════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ═══════════════ HERO ═══════════════ */
+.hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  background: linear-gradient(165deg, var(--navy-900) 0%, var(--navy-700) 40%, var(--blue-500) 100%);
+  overflow: hidden; padding-top: 72px;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03; animation: grain 8s steps(10) infinite;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-orb {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25; pointer-events: none;
+}
+.hero-orb-1 { width: 500px; height: 500px; background: var(--blue-500); top: -100px; right: -100px; animation: float 8s ease-in-out infinite; }
+.hero-orb-2 { width: 350px; height: 350px; background: var(--cyan); bottom: -80px; left: 10%; animation: float 10s ease-in-out infinite 2s; }
+.hero-content {
+  position: relative; z-index: 2; max-width: 720px;
+  animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  padding: 8px 18px; border-radius: 100px; font-size: 0.82rem;
+  color: var(--blue-200); font-weight: 600; margin-bottom: 28px;
+  font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+.hero-badge-dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: pulse-glow 2s ease-in-out infinite; }
+.hero h1 {
+  font-size: clamp(2.5rem, 5.5vw, 4rem); font-weight: 800;
+  color: var(--white); letter-spacing: -0.03em; margin-bottom: 8px;
+  line-height: 1.08;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--blue-200), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.2rem); color: var(--slate-300);
+  margin: 24px 0 40px; line-height: 1.8; max-width: 580px;
+}
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; border-radius: 100px; font-weight: 700;
+  font-size: 0.95rem; font-family: var(--font-display);
+  transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer; border: none; letter-spacing: -0.01em;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue-400), var(--blue-500));
+  color: var(--white); box-shadow: 0 4px 24px rgba(37,99,235,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,99,235,0.45); }
+.btn-outline {
+  background: rgba(255,255,255,0.06); color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+.btn-outline:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.35); }
+.btn-dark {
+  background: var(--navy-800); color: var(--white);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-dark:hover { background: var(--navy-700); }
+
+/* Hero dashboard card */
+.hero-visual {
+  position: relative; z-index: 2;
+  animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.5s both;
+}
+.hero-dash {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-xl); padding: 32px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.hero-dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.hero-dash-title { color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.hero-dash-badge { font-size: 0.75rem; color: var(--cyan); background: rgba(34,211,238,0.1); padding: 4px 12px; border-radius: 100px; font-weight: 600; }
+.hero-kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
+.hero-kpi { background: rgba(255,255,255,0.04); border-radius: var(--radius-md); padding: 16px; border: 1px solid rgba(255,255,255,0.06); }
+.hero-kpi-label { font-size: 0.72rem; color: var(--slate-400); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.hero-kpi-value { font-size: 1.5rem; font-weight: 800; color: var(--white); font-family: var(--font-display); }
+.hero-kpi-change { font-size: 0.75rem; color: #34d399; font-weight: 600; }
+.hero-bars { display: flex; gap: 8px; align-items: flex-end; height: 80px; }
+.hero-bar {
+  flex: 1; background: linear-gradient(to top, var(--blue-500), var(--blue-300));
+  border-radius: 6px 6px 0 0; animation: barGrow 1.2s cubic-bezier(0.16,1,0.3,1) both;
+  opacity: 0.8;
+}
+@keyframes barGrow { from { height: 0; } }
+.hero-bar:nth-child(1) { height: 45%; animation-delay: 0.8s; }
+.hero-bar:nth-child(2) { height: 72%; animation-delay: 0.9s; }
+.hero-bar:nth-child(3) { height: 58%; animation-delay: 1.0s; }
+.hero-bar:nth-child(4) { height: 88%; animation-delay: 1.1s; }
+.hero-bar:nth-child(5) { height: 65%; animation-delay: 1.2s; }
+.hero-bar:nth-child(6) { height: 95%; animation-delay: 1.3s; }
+.hero-bar:nth-child(7) { height: 78%; animation-delay: 1.4s; }
+
+.hero-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+/* ═══════════════ BENEFITS ═══════════════ */
+.benefits-section { background: var(--slate-50); }
+.section-header { text-align: center; margin-bottom: 64px; }
+.section-label {
+  display: inline-block; font-size: 0.78rem; font-weight: 700;
+  color: var(--blue-500); text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 16px; font-family: var(--font-display);
+}
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800;
+  color: var(--navy-900); letter-spacing: -0.03em; margin-bottom: 16px;
+}
+.section-desc { font-size: 1.1rem; color: var(--slate-500); max-width: 600px; margin: 0 auto; }
+.benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 24px; }
+.benefit-card {
+  background: var(--white); border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg); padding: 36px;
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+  position: relative; overflow: hidden;
+}
+.benefit-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--blue-400), var(--cyan));
+  opacity: 0; transition: opacity 0.3s;
+}
+.benefit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--blue-200); }
+.benefit-card:hover::before { opacity: 1; }
+.benefit-icon {
+  width: 52px; height: 52px; border-radius: var(--radius-md);
+  background: var(--blue-50); display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 1.4rem;
+}
+.benefit-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy-900); margin-bottom: 10px; }
+.benefit-card p { font-size: 0.95rem; color: var(--slate-500); line-height: 1.7; }
+
+/* ═══════════════ COVERAGE ═══════════════ */
+.coverage-section {
+  background: linear-gradient(165deg, var(--navy-900), var(--navy-700));
+  position: relative; overflow: hidden;
+}
+.coverage-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(37,99,235,0.12) 0%, transparent 60%);
+}
+.coverage-section .section-label { color: var(--blue-300); }
+.coverage-section .section-title { color: var(--white); }
+.coverage-section .section-desc { color: var(--slate-400); }
+.coverage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; position: relative; z-index: 1; }
+.coverage-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg); padding: 32px;
+  transition: all 0.3s; display: flex; align-items: flex-start; gap: 16px;
+}
+.coverage-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+.coverage-icon { font-size: 1.5rem; flex-shrink: 0; }
+.coverage-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.coverage-card p { font-size: 0.88rem; color: var(--slate-400); }
+
+/* ═══════════════ PLATFORM ═══════════════ */
+.platform-section { background: var(--white); }
+.platform-box {
+  background: linear-gradient(135deg, var(--blue-50), var(--slate-50));
+  border: 1px solid var(--blue-100); border-radius: var(--radius-xl);
+  padding: 56px; position: relative; overflow: hidden;
+}
+.platform-box::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.platform-box h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--navy-900);
+  margin-bottom: 20px; letter-spacing: -0.02em; max-width: 800px; position: relative;
+}
+.platform-box h2 span { color: var(--blue-500); }
+.platform-box p {
+  font-size: 1.05rem; color: var(--slate-600); line-height: 1.9;
+  max-width: 820px; position: relative;
+}
+.platform-tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; position: relative; }
+.tech-tag {
+  padding: 8px 18px; border-radius: 100px; font-size: 0.82rem;
+  font-weight: 600; font-family: var(--font-display);
+  background: var(--white); border: 1px solid var(--slate-200);
+  color: var(--slate-700);
+}
+
+/* ═══════════════ CONTACT STRIP ON HOME ═══════════════ */
+.contact-strip {
+  background: var(--white);
+}
+.contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 28px; }
+.contact-person {
+  background: var(--slate-50); border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg); padding: 36px;
+  transition: all 0.3s;
+}
+.contact-person:hover { box-shadow: var(--shadow-md); border-color: var(--blue-200); }
+.contact-person h3 { font-size: 1.15rem; font-weight: 800; color: var(--navy-900); margin-bottom: 2px; }
+.contact-person .role { font-size: 0.88rem; color: var(--blue-500); font-weight: 600; font-style: italic; margin-bottom: 18px; display: block; }
+.contact-detail { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 0.92rem; color: var(--slate-600); }
+.contact-detail a { color: var(--blue-500); font-weight: 500; }
+.contact-detail a:hover { text-decoration: underline; }
+
+/* ═══════════════ LINKEDIN CTA ═══════════════ */
+.linkedin-section {
+  background: linear-gradient(135deg, var(--navy-900), var(--blue-500));
+  text-align: center; position: relative; overflow: hidden;
+}
+.linkedin-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(37,99,235,0.15) 0%, transparent 70%);
+}
+.linkedin-section h2 { color: var(--white); font-size: 2rem; font-weight: 800; margin-bottom: 12px; position: relative; }
+.linkedin-section p { color: var(--blue-200); font-size: 1.05rem; margin-bottom: 28px; position: relative; }
+.linkedin-section .btn { position: relative; }
+
+/* ═══════════════ PARTNERS PAGE ═══════════════ */
+.partners-hero {
+  padding: 140px 0 60px;
+  background: linear-gradient(165deg, var(--navy-900), var(--navy-700));
+  text-align: center; position: relative; overflow: hidden;
+}
+.partners-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(37,99,235,0.15) 0%, transparent 60%);
+}
+.partners-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); position: relative; margin-bottom: 12px; }
+.partners-hero p { color: var(--blue-200); font-size: 1.1rem; max-width: 600px; margin: 0 auto; position: relative; }
+.partners-intro {
+  max-width: 780px; margin: 0 auto; text-align: center;
+  font-size: 1.05rem; color: var(--slate-600); line-height: 1.8;
+  padding: 48px 24px 0;
+}
+.partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 28px; }
+.partner-card {
+  background: var(--white); border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg); padding: 36px;
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+  display: flex; flex-direction: column;
+}
+.partner-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--blue-200); }
+.partner-logo-wrap {
+  height: 60px; display: flex; align-items: center; margin-bottom: 20px;
+}
+.partner-logo-wrap img { max-height: 50px; max-width: 180px; object-fit: contain; }
+.partner-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy-900); margin-bottom: 4px; }
+.partner-card .partner-tag { font-size: 0.82rem; font-weight: 700; color: var(--blue-500); margin-bottom: 14px; display: block; }
+.partner-card p { font-size: 0.92rem; color: var(--slate-500); line-height: 1.7; flex: 1; }
+.partner-card .partner-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 18px; color: var(--blue-500); font-weight: 600; font-size: 0.88rem;
+  transition: gap 0.2s;
+}
+.partner-card:hover .partner-link { gap: 10px; }
+
+/* ═══════════════ SOLUTIONS PAGE ═══════════════ */
+.solutions-hero {
+  padding: 140px 0 60px;
+  background: linear-gradient(165deg, var(--navy-900), var(--navy-700));
+  text-align: center; position: relative; overflow: hidden;
+}
+.solutions-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(37,99,235,0.15) 0%, transparent 60%);
+}
+.solutions-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); position: relative; margin-bottom: 12px; }
+.solutions-hero p { color: var(--blue-200); font-size: 1.1rem; max-width: 600px; margin: 0 auto; position: relative; }
+.solution-block { padding: 80px 0; border-bottom: 1px solid var(--slate-200); }
+.solution-block:last-child { border-bottom: none; }
+.solution-block:nth-child(even) { background: var(--slate-50); }
+.solution-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.solution-layout.reverse { direction: rtl; }
+.solution-layout.reverse > * { direction: ltr; }
+.solution-content h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800;
+  color: var(--navy-900); margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.solution-content .solution-subtitle {
+  font-size: 1rem; color: var(--blue-500); font-weight: 600;
+  margin-bottom: 24px; font-family: var(--font-display);
+}
+.solution-features { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.solution-features li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 0.95rem; color: var(--slate-600); line-height: 1.6;
+}
+.solution-features li::before {
+  content: '✓'; color: var(--blue-500); font-weight: 800; flex-shrink: 0;
+  width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+  background: var(--blue-50); border-radius: 50%; font-size: 0.8rem;
+}
+.solution-visual {
+  background: linear-gradient(135deg, var(--blue-50), var(--slate-100));
+  border-radius: var(--radius-xl); padding: 40px; display: flex;
+  align-items: center; justify-content: center; min-height: 300px;
+  border: 1px solid var(--blue-100);
+}
+.solution-visual img { max-width: 100%; border-radius: var(--radius-md); }
+.solution-icon-large { font-size: 5rem; opacity: 0.5; }
+
+/* ═══════════════ EVENTS PAGE ═══════════════ */
+.events-hero {
+  padding: 140px 0 60px;
+  background: linear-gradient(165deg, var(--navy-900), var(--navy-700));
+  text-align: center; position: relative; overflow: hidden;
+}
+.events-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(37,99,235,0.15) 0%, transparent 60%);
+}
+.events-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); position: relative; margin-bottom: 12px; }
+.events-hero p { color: var(--blue-200); font-size: 1.1rem; max-width: 600px; margin: 0 auto; position: relative; }
+.events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 28px; }
+.event-card {
+  background: var(--white); border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg); overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.event-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--blue-200); }
+.event-card-top {
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+  padding: 28px 32px; position: relative;
+}
+.event-date {
+  font-size: 0.82rem; font-weight: 700; color: var(--blue-300);
+  font-family: var(--font-display); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 8px;
+}
+.event-card h3 { font-size: 1.2rem; font-weight: 800; color: var(--white); }
+.event-card-body { padding: 24px 32px; }
+.event-card-body p { font-size: 0.92rem; color: var(--slate-500); line-height: 1.7; }
+
+/* ═══════════════ CONTACT PAGE ═══════════════ */
+.contact-hero {
+  padding: 140px 0 60px;
+  background: linear-gradient(165deg, var(--navy-900), var(--navy-700));
+  text-align: center; position: relative; overflow: hidden;
+}
+.contact-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(37,99,235,0.15) 0%, transparent 60%);
+}
+.contact-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); position: relative; margin-bottom: 12px; }
+.contact-hero p { color: var(--blue-200); font-size: 1.1rem; max-width: 600px; margin: 0 auto; position: relative; }
+.contact-hero p a { color: var(--cyan); text-decoration: underline; }
+.contact-page-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+.contact-form-wrap {
+  background: var(--white); border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl); padding: 48px;
+  box-shadow: var(--shadow-md);
+}
+.contact-form-wrap h2 { font-size: 1.5rem; font-weight: 800; color: var(--navy-900); margin-bottom: 8px; }
+.contact-form-wrap .form-desc { color: var(--slate-500); margin-bottom: 32px; font-size: 0.95rem; }
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block; font-size: 0.85rem; font-weight: 600; color: var(--slate-700);
+  margin-bottom: 6px; font-family: var(--font-display);
+}
+.form-input, .form-textarea {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-sm); font-family: var(--font-body);
+  font-size: 0.95rem; color: var(--slate-700);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--slate-50);
+}
+.form-input:focus, .form-textarea:focus {
+  outline: none; border-color: var(--blue-400);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+  background: var(--white);
+}
+.form-textarea { min-height: 120px; resize: vertical; }
+.form-submit {
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-400));
+  color: var(--white); border: none; padding: 14px 36px;
+  border-radius: 100px; font-weight: 700; font-size: 1rem;
+  font-family: var(--font-display); cursor: pointer;
+  transition: all 0.25s; box-shadow: 0 4px 24px rgba(37,99,235,0.3);
+}
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,99,235,0.45); }
+.contact-sidebar h3 { font-size: 1.2rem; font-weight: 800; color: var(--navy-900); margin-bottom: 20px; }
+.contact-sidebar .contact-person { margin-bottom: 20px; }
+
+/* ═══════════════ FOOTER ═══════════════ */
+.site-footer {
+  background: var(--navy-900); padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+.footer-text { color: var(--slate-500); font-size: 0.88rem; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+  .hero-layout { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { order: -1; }
+  .solution-layout, .solution-layout.reverse { grid-template-columns: 1fr; direction: ltr; }
+  .contact-page-layout { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: 72px; left: 0; right: 0; background: var(--navy-900);
+    padding: 16px 24px; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-dropdown:hover .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; background: transparent; border: none; padding-left: 16px; }
+  .benefits-grid, .partners-grid, .events-grid { grid-template-columns: 1fr; }
+  .hero-kpi-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#home" onclick="navigateTo('home')">
+      <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/11157557/636623_544127.png" alt="MyTrucksure Logo">
+      My<span>Trucksure</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link active" onclick="navigateTo('home')" data-page="home">Home</a>
+      <div class="nav-dropdown">
+        <a class="nav-link" data-page="partners">Partners</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" onclick="navigateTo('partners','partnerships')">Partnerships</a>
+          <a class="dropdown-item" onclick="navigateTo('partners','integrations')">Integrations</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-link" data-page="solutions">Solutions</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" onclick="navigateTo('solutions','underwriting')">Underwriting</a>
+          <a class="dropdown-item" onclick="navigateTo('solutions','policyadmin')">Policy Admin</a>
+          <a class="dropdown-item" onclick="navigateTo('solutions','billing')">Billing &amp; Payments</a>
+        </div>
+      </div>
+      <a class="nav-link" onclick="navigateTo('events')" data-page="events">Events</a>
+      <a class="nav-link nav-cta" onclick="navigateTo('contact')" data-page="contact">Contact Us</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="container">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-badge"><span class="hero-badge-dot"></span> Insurance SaaS Platform</div>
+          <h1>MyTrucksure<br><em>make insurance easy</em></h1>
+          <p class="hero-sub">The MyTrucksure is a purpose built SaaS app for the trucking insurance market. It is a technology platform for insurance Carriers, MGA's, Brokers and InsureTech's as well as Lloyd's syndicates and Risk Retention Groups. Whether your organization is large or small, it is for anyone who is looking to sell and service insurance to the highly specialized U.S. trucking industry.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" onclick="navigateTo('contact')">Get a Demo →</a>
+            <a class="btn btn-outline" onclick="navigateTo('solutions')">Explore Solutions</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-dash">
+            <div class="hero-dash-header">
+              <span class="hero-dash-title">Dashboard Overview</span>
+              <span class="hero-dash-badge">● Live</span>
+            </div>
+            <div class="hero-kpi-row">
+              <div class="hero-kpi">
+                <div class="hero-kpi-label">Quotes</div>
+                <div class="hero-kpi-value">1,284</div>
+                <div class="hero-kpi-change">↑ 12.3%</div>
+              </div>
+              <div class="hero-kpi">
+                <div class="hero-kpi-label">Bound</div>
+                <div class="hero-kpi-value">847</div>
+                <div class="hero-kpi-change">↑ 8.7%</div>
+              </div>
+              <div class="hero-kpi">
+                <div class="hero-kpi-label">Renewals</div>
+                <div class="hero-kpi-value">93%</div>
+                <div class="hero-kpi-change">↑ 2.1%</div>
+              </div>
+            </div>
+            <div class="hero-bars">
+              <div class="hero-bar"></div>
+              <div class="hero-bar"></div>
+              <div class="hero-bar"></div>
+              <div class="hero-bar"></div>
+              <div class="hero-bar"></div>
+              <div class="hero-bar"></div>
+              <div class="hero-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="benefits-section section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Why MyTrucksure</span>
+        <h2 class="section-title">The Benefits of MyTrucksure SaaS</h2>
+        <p class="section-desc">Cost effective, digital enablement that will drive business growth, operational efficiency and better customer service.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">📈</div>
+          <h3>Increase Quotation &amp; Binding</h3>
+          <p>Increase quotation response rate and increase binding through streamlined digital workflows.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">⚡</div>
+          <h3>Eliminate Manual Processes</h3>
+          <p>Eliminate manual processes and spreadsheets with automated, intelligent underwriting tools.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">🔍</div>
+          <h3>Easy Data Access</h3>
+          <p>Easy access to all your underwriting and customer data in one centralized platform.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">🏦</div>
+          <h3>Premium Finance Integration</h3>
+          <p>Automated premium finance integration for seamless payment workflows.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">🔗</div>
+          <h3>API Connectivity</h3>
+          <p>Connect to the broader trucking digital ecosystem through easily enabled API connectivity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coverage -->
+  <section class="coverage-section section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Products &amp; Coverages</span>
+        <h2 class="section-title">Key Trucking Products Supported</h2>
+        <p class="section-desc">Rapid go live for key trucking products and coverages, sold either mono-line or as a custom configured package.</p>
+      </div>
+      <div class="coverage-grid">
+        <div class="coverage-card reveal"><span class="coverage-icon">🚛</span><div><h3>Auto Liability</h3><p>Commercial auto liability coverage for trucking operations</p></div></div>
+        <div class="coverage-card reveal"><span class="coverage-icon">🛡️</span><div><h3>Truck &amp; Trailer Physical Damage</h3><p>Comprehensive physical damage protection for trucks and trailers</p></div></div>
+        <div class="coverage-card reveal"><span class="coverage-icon">🔄</span><div><h3>Non-Trucking Liability / Bob-Tail</h3><p>Coverage for owner-operators when not under dispatch</p></div></div>
+        <div class="coverage-card reveal"><span class="coverage-icon">🤝</span><div><h3>Trailer Interchange</h3><p>Protection for trailers in interchange agreements</p></div></div>
+        <div class="coverage-card reveal"><span class="coverage-icon">📦</span><div><h3>Cargo</h3><p>Freight and cargo insurance coverage</p></div></div>
+        <div class="coverage-card reveal"><span class="coverage-icon">🏢</span><div><h3>General Liability</h3><p>Broad-form general liability for trucking businesses</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Description -->
+  <section class="platform-section section-pad">
+    <div class="container">
+      <div class="platform-box reveal">
+        <h2><span>MyTrucksure</span> supports a fully digital policy life cycle</h2>
+        <p>Including rate, quote, bind, issue endorsements, renewal and cancellation and out of the box the collection of specific trucking data including owner-operator, carrier, fleet and driver information. The app is connected to a growing ecosystem of trucking specific third party data and services specific to needs of selling and truck insurance including MVR retrieval, state auto liability insurance reporting and premium finance. <strong>MyTrucksure</strong> powered by InsureMO® is based on latest micro-service, REST API, cloud native technology architecture. It is hosted in the U.S. on Amazon Web Services and is cost effective.</p>
+        <div class="platform-tech-tags">
+          <span class="tech-tag">Micro-Service</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">Cloud Native</span>
+          <span class="tech-tag">AWS Hosted</span>
+          <span class="tech-tag">InsureMO®</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Strip -->
+  <section class="contact-strip section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Please contact us for introduction discussion and demo.</h2>
+      </div>
+      <div class="contact-cards">
+        <div class="contact-person reveal">
+          <h3>Martin Crew</h3>
+          <span class="role">Vice President &amp; General Manager, MyTrucksure</span>
+          <div class="contact-detail">📞 <a href="tel:+17735802168">+1 773 580 2168</a></div>
+          <div class="contact-detail">✉️ <a href="mailto:martin.crew@mytrucksure.com">martin.crew@mytrucksure.com</a></div>
+          <div class="contact-detail">🔗 <a href="https://www.linkedin.com/in/martin-crew-794110b/" target="_blank">LinkedIn</a></div>
+        </div>
+        <div class="contact-person reveal">
+          <h3>Josh Linton</h3>
+          <span class="role">Sales Director, MyTrucksure</span>
+          <div class="contact-detail">📞 <a href="tel:+14127091909">+1 412 709 1909</a></div>
+          <div class="contact-detail">✉️ <a href="mailto:joshua.linton@insuremo.com">joshua.linton@insuremo.com</a></div>
+          <div class="contact-detail">🔗 <a href="https://www.linkedin.com/in/jtlinton" target="_blank">LinkedIn</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LinkedIn -->
+  <section class="linkedin-section section-pad">
+    <div class="container">
+      <h2 class="reveal">Follow Us!</h2>
+      <p class="reveal">Stay up to date with MyTrucksure by connecting with us on LinkedIn</p>
+      <a class="btn btn-primary reveal" href="https://www.linkedin.com/company/mytrucksure/?viewAsMember=true" target="_blank">Follow on LinkedIn →</a>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ PARTNERS PAGE ═══════════════ -->
+<div class="page" id="page-partners">
+  <section class="partners-hero">
+    <div class="container">
+      <h1>Our Trusted Partners</h1>
+      <p>Bringing you efficiency with smart, seamless integrations</p>
+    </div>
+  </section>
+  <p class="partners-intro reveal">It is our mission to make trucking insurance simple, effective, and more productive for you and your customers. Through each of our trusted partnerships, we work to bring you the best-in-class solutions tailored to your business. Explore our partnerships and integrations below.</p>
+
+  <section class="section-pad" id="partnerships">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Partnerships</span>
+        <h2 class="section-title">Technology Partners</h2>
+      </div>
+      <div class="partners-grid">
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/519616_305359.png" alt="Carrier Software"></div>
+          <h3>Carrier Software</h3>
+          <span class="partner-tag">AI Solutions: Underwriting, ELDs &amp; Loss Runs</span>
+          <p>Carrier Software is a leading InsurTech provider transforming commercial auto underwriting. Our unified platform combines FMCSA safety data, ELD telematics, proprietary peer benchmarking, and AI-driven loss run analysis to deliver a clear, 360-degree view of carrier risk. We turn complex data into actionable insights that help underwriters price with precision, agents maximize premiums, and carriers improve loss ratios.</p>
+          <a class="partner-link" href="https://www.carriersoftware.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/511256_246371.png" alt="IPFS"></div>
+          <h3>IPFS</h3>
+          <span class="partner-tag">Premium Financing Solutions</span>
+          <p>IPFS offers flexible premium financing solutions that help businesses manage cashflow by spreading insurance payments over time. With advanced technology and personalized service, IPFS simplifies the payment process for agents, brokers, and more.</p>
+          <a class="partner-link" href="https://www.ipfs.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/235849_757392.png" alt="Sambasafety"></div>
+          <h3>Sambasafety</h3>
+          <span class="partner-tag">Risk Insight and Mitigation</span>
+          <p>Sambasafety provides a data-driven platform that helps companies monitor and manage driver risk through motor vehicle record checks, telematics, and compliance tools.</p>
+          <a class="partner-link" href="https://sambasafety.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/172036_851908.png" alt="First Insurance Funding"></div>
+          <h3>First Insurance Funding</h3>
+          <span class="partner-tag">Premium Finance</span>
+          <p>First Insurance Funding provides flexible premium financing solutions that simplify insurance payments for businesses and individuals. Trusted service and innovative technology ensure seamless cash flow management and uninterrupted coverage.</p>
+          <a class="partner-link" href="https://www.firstinsurancefunding.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/522593_948394.png" alt="TruckerCloud"></div>
+          <h3>TruckerCloud</h3>
+          <span class="partner-tag">Telematics Aggregator</span>
+          <p>TruckerCloud is a telematics solution for fleet insurance that lowers your loss ratio using telematics insights. TruckerCloud is compatible with more than 90% of commercial vehicles and offers integrations with 50+ ELDs and cameras.</p>
+          <a class="partner-link" href="https://truckercloud.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/481574_616318.png" alt="Anddone"></div>
+          <h3>Anddone</h3>
+          <span class="partner-tag">Payment Processing Solution</span>
+          <p>Anddone offers customizable payment solutions built for the insurance industry. Our flexible platform enables you to manage payments effortlessly, providing your customers with a seamless and straightforward way to pay.</p>
+          <a class="partner-link" href="https://www.anddone.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/596271_587676.png" alt="Nexar"></div>
+          <h3>Nexar</h3>
+          <span class="partner-tag">AI Powered Dashcams</span>
+          <p>Nexar Fleets combines AI‑powered dash cams, live GPS tracking, geofencing and remote livestreaming to give fleet managers real‑time visibility into vehicle locations, driver behavior, and critical roadway events like hard braking and collisions.</p>
+          <a class="partner-link" href="https://www.getnexar.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/521825_466727.png" alt="Velos"></div>
+          <h3>Velos</h3>
+          <span class="partner-tag">Underwriting Submission and Claims Automation</span>
+          <p>Velos uses AI-powered "workers" to process underwriting submissions with precision and speed, eliminating manual entry, reducing errors, and accelerating your quote‑to‑bind cycle. Beyond underwriting, our platform scales to automate complex back‑office workflows across finance, claims, and more.</p>
+          <a class="partner-link" href="https://tryvelos.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/674760_336178.png" alt="Loss Scan AI by Deep Vector"></div>
+          <h3>Loss Scan AI — Powered by Deep Vector</h3>
+          <span class="partner-tag">Data Extraction Solution</span>
+          <p>Deep Vector delivers cutting-edge AI solutions that combine deep learning and vector search to power real-time, context-aware recommendations and predictions. The platform helps businesses harness unstructured data for smarter automation, faster decisions, and better user experiences.</p>
+          <a class="partner-link" href="https://www.deepvector.com/" target="_blank">Visit Website →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad" id="integrations" style="background: var(--slate-50);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Integrations</span>
+        <h2 class="section-title">Seamlessly Built Into Our Platform</h2>
+      </div>
+      <div class="partners-grid">
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/225223_677498.png" alt="Hubspot"></div>
+          <h3>Hubspot</h3>
+          <span class="partner-tag">CRM</span>
+          <p>HubSpot's all-in-one CRM platform helps you attract leads, close deals, and grow better without the hassle of juggling multiple tools. Streamline your marketing, sales, and customer service with powerful automation and real-time insights.</p>
+          <a class="partner-link" href="https://www.hubspot.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/110619_520074.png" alt="IVANS"></div>
+          <h3>IVANS</h3>
+          <span class="partner-tag">Digital Access to Insured Data</span>
+          <p>IVANS connects insurance carriers, agencies, and MGAs through a digital network that streamlines the distribution and servicing of insurance products. Its platform automates data exchange, improves connectivity, and enhances efficiency across the insurance lifecycle.</p>
+          <a class="partner-link" href="https://www.ivans.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/866684_694129.png" alt="Verisk CV-ALIR"></div>
+          <h3>Verisk CV-ALIR</h3>
+          <span class="partner-tag">Compliance</span>
+          <p>Verisk CV-ALIR streamlines automobile liability insurance reporting by offering a single, standardized data feed for multi-state DMV compliance. Simplify operations, reduce IT burden, and ensure accurate, automated reporting with trusted Verisk technology.</p>
+          <a class="partner-link" href="https://www.verisk.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/343994_861148.png" alt="Docusign"></div>
+          <h3>Docusign</h3>
+          <span class="partner-tag">eSignature and Documents</span>
+          <p>DocuSign makes it easy to securely sign, send, and manage documents anytime, anywhere. With fast, legally binding eSignatures and powerful automation, DocuSign streamlines workflows and keeps your business moving.</p>
+          <a class="partner-link" href="https://www.docusign.com/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/625689_963393.png" alt="FMCSA"></div>
+          <h3>FMCSA</h3>
+          <span class="partner-tag">Commercial Vehicle Safety</span>
+          <p>FMCSA keeps America's roadways safe by regulating and enforcing safety standards for commercial motor vehicles. Through compliance, licensing, and safety initiatives, FMCSA supports a safer, more efficient trucking and transportation industry.</p>
+          <a class="partner-link" href="https://www.fmcsa.dot.gov/" target="_blank">Visit Website →</a>
+        </div>
+        <div class="partner-card reveal">
+          <div class="partner-logo-wrap"><img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_1/11157557/571480_75599.png" alt="NHTSA"></div>
+          <h3>NHTSA</h3>
+          <span class="partner-tag">Vehicle and Road Safety</span>
+          <p>NHTSA is dedicated to making America's roads safer by setting and enforcing vehicle safety standards and promoting driver education. Through innovative research and public awareness campaigns, NHTSA helps reduce crashes, save lives, and protect all road users.</p>
+          <a class="partner-link" href="https://www.nhtsa.gov/" target="_blank">Visit Website →</a>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:48px; color: var(--slate-500); font-size: 0.95rem;" class="reveal">Check back frequently to stay up to date on our list of partnerships and integrations!</p>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ SOLUTIONS PAGE ═══════════════ -->
+<div class="page" id="page-solutions">
+  <section class="solutions-hero">
+    <div class="container">
+      <h1>Our Solutions</h1>
+      <p>MyTrucksure offers digital solutions that simplify underwriting, policy administration, billing and payments, and more.</p>
+    </div>
+  </section>
+
+  <div class="solution-block" id="underwriting">
+    <div class="container">
+      <div class="solution-layout reveal">
+        <div class="solution-content">
+          <h2>Underwriting</h2>
+          <p class="solution-subtitle">Digital Underwriting Workbench</p>
+          <ul class="solution-features">
+            <li>Stand alone intelligent underwriting and automation integrated with advanced data and AI capabilities</li>
+            <li>Purpose-built for trucking, fleet, and commercial auto underwriting</li>
+            <li>Compliments any back-office policy administration system</li>
+            <li>Rating options include: Excel Rating-as-a-Service or InsureMO Rating-as-a-Service</li>
+            <li>Increase submission response rates</li>
+            <li>Powered by InsureMO, cloud native, microservice, API first insurance architecture</li>
+          </ul>
+        </div>
+        <div class="solution-visual">
+          <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/11157557/317330_234688.png" alt="Underwriting Dashboard">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="solution-block" id="policyadmin">
+    <div class="container">
+      <div class="solution-layout reverse reveal">
+        <div class="solution-content">
+          <h2>Policy Administration</h2>
+          <p class="solution-subtitle">Full Life-Cycle Policy Admin</p>
+          <ul class="solution-features">
+            <li>Intelligent underwriting and automation integrated with advanced data and AI capabilities</li>
+            <li>Full life-cycle policy administration system of record (SOR)</li>
+            <li>Rating options include: Excel Rating-as-a-Service or InsureMO Rating-as-a-Service</li>
+            <li>Rapid cost, effective onboarding</li>
+            <li>Powered by InsureMO, cloud native, microservice, API first insurance architecture</li>
+          </ul>
+        </div>
+        <div class="solution-visual">
+          <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/11157557/424294_616902.png" alt="Policy Administration">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="solution-block" id="billing">
+    <div class="container">
+      <div class="solution-layout reveal">
+        <div class="solution-content">
+          <h2>Billing and Payments</h2>
+          <p class="solution-subtitle">Integrated billing, collections, and payment opportunities</p>
+          <ul class="solution-features">
+            <li>Fully integrated with MyTrucksure Policy Administration</li>
+            <li>Billing and payment information available at the policy level for underwriters or for back-office billing and payment analysts</li>
+            <li>DirectBill, Agent Bill, and multiple installment plan options, taxes, fees, and miscellaneous fee calculation</li>
+            <li>Secure, real-time and scheduled payment integrations and Premium Finance Integrations</li>
+          </ul>
+        </div>
+        <div class="solution-visual">
+          <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/11157557/352294_105983.png" alt="Billing and Payments">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ EVENTS PAGE ═══════════════ -->
+<div class="page" id="page-events">
+  <section class="events-hero">
+    <div class="container">
+      <h1>Meet Us In Person</h1>
+      <p>Innovation and Connection — at the following 2025 events</p>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container">
+      <div class="events-grid">
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date">October 14, 2025</div>
+            <h3>ITC Vegas 2025</h3>
+          </div>
+          <div class="event-card-body">
+            <p>MyTrucksure is proud to support ITC Vegas 2025 as a gold sponsor. ITC Vegas is one of the world's largest insurtech events, bringing together the industry's most innovative minds.</p>
+          </div>
+        </div>
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date">September 16, 2025</div>
+            <h3>InsurTech Chicago 2025</h3>
+          </div>
+          <div class="event-card-body">
+            <p>MyTrucksure is excited to attend InsurTech Chicago on September 16th, at HUB International. We look forward to connecting with industry leaders and showcasing our platform.</p>
+          </div>
+        </div>
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date">April 14, 2025</div>
+            <h3>MCIEF 2025</h3>
+          </div>
+          <div class="event-card-body">
+            <p>MyTrucksure is excited to sponsor and exhibit at the MCIEF 2025 Annual Conference, taking place in the heart of the trucking insurance industry.</p>
+          </div>
+        </div>
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date">April 2, 2025</div>
+            <h3>InsurTech NY 2025</h3>
+          </div>
+          <div class="event-card-body">
+            <p>MyTrucksure is thrilled to attend the InsurTech 2025 NY Spring Conference on April 2-3. Come meet our team and discover how we're transforming trucking insurance.</p>
+          </div>
+        </div>
+        <div class="event-card reveal">
+          <div class="event-card-top">
+            <div class="event-date">January 23, 2025</div>
+            <h3>ATD Show</h3>
+          </div>
+          <div class="event-card-body">
+            <p>MyTrucksure is excited to attend the ATD Show from January 23-25. Come meet our US team to learn about our innovative trucking insurance SaaS platform.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ CONTACT PAGE ═══════════════ -->
+<div class="page" id="page-contact">
+  <section class="contact-hero">
+    <div class="container">
+      <h1>Speak to Us Today!</h1>
+      <p>Fill out this short form or email us at <a href="mailto:martin.crew@mytrucksure.com">martin.crew@mytrucksure.com</a></p>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container">
+      <div class="contact-page-layout">
+        <div class="contact-form-wrap reveal">
+          <h2>Send Us a Message</h2>
+          <p class="form-desc">A field marked with * indicates that the information is required.</p>
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-input" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input type="email" class="form-input" placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <input type="text" class="form-input" placeholder="Your company name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message *</label>
+            <textarea class="form-textarea" placeholder="Tell us about your needs..."></textarea>
+          </div>
+          <button class="form-submit">Send Message →</button>
+        </div>
+        <div class="contact-sidebar">
+          <h3>Or reach us directly:</h3>
+          <div class="contact-person reveal">
+            <h3>Martin Crew</h3>
+            <span class="role">VP &amp; General Manager</span>
+            <div class="contact-detail">📞 <a href="tel:+17735802168">+1 773 580 2168</a></div>
+            <div class="contact-detail">✉️ <a href="mailto:martin.crew@mytrucksure.com">martin.crew@mytrucksure.com</a></div>
+            <div class="contact-detail">🔗 <a href="https://www.linkedin.com/in/martin-crew-794110b/" target="_blank">LinkedIn</a></div>
+          </div>
+          <div class="contact-person reveal">
+            <h3>Josh Linton</h3>
+            <span class="role">Sales Director</span>
+            <div class="contact-detail">📞 <a href="tel:+14127091909">+1 412 709 1909</a></div>
+            <div class="contact-detail">✉️ <a href="mailto:joshua.linton@insuremo.com">joshua.linton@insuremo.com</a></div>
+            <div class="contact-detail">🔗 <a href="https://www.linkedin.com/in/jtlinton" target="_blank">LinkedIn</a></div>
+          </div>
+          <div style="margin-top: 32px;">
+            <h3>Follow Us</h3>
+            <p style="color: var(--slate-500); font-size: 0.92rem; margin: 8px 0 16px;">Connect with us on LinkedIn</p>
+            <a class="btn btn-dark" href="https://www.linkedin.com/company/mytrucksure/?viewAsMember=true" target="_blank">Follow on LinkedIn →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-text">Copyright &copy; 2025 MyTrucksure. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+// Navigation
+function navigateTo(page, section) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const activeLink = document.querySelector('[data-page="' + page + '"]');
+  if (activeLink) activeLink.classList.add('active');
+  // Close mobile menu
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  // Scroll
+  if (section) {
+    setTimeout(() => {
+      const el = document.getElementById(section);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // Re-observe reveals
+  setTimeout(observeReveals, 200);
+}
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+});
+
+// Scroll-triggered reveal
+function observeReveals() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+}
+document.addEventListener('DOMContentLoaded', observeReveals);
+</script>
+
+</body>
+</html>
